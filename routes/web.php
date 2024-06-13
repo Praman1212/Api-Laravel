@@ -1,10 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('user',function(){
-    return ' Hello World';
-});
+Route::get('student',[ApiController::class,'viewPage']);

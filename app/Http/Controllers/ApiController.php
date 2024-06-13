@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+    public function viewPage(){
+        return view('index');
+    }
     public function index()
     {
         $student = Student::all();
