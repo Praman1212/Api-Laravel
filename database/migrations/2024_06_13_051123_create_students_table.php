@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->string('password');
+            $table->boolean('is_active');
+            $table->string('image');
+            $table->text('ckeditor');
             $table->timestamps();
         });
     }

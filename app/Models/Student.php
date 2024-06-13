@@ -12,6 +12,10 @@ class Student extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone'
+        'phone',
+        'password',
+        'is_active',
+        'image',
+        'ckeditor'
     ];
 }

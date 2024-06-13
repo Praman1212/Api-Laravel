@@ -22,13 +22,19 @@ class ApiController extends Controller
 
     public function store(Request $request)
     {
-        try {
+
+
+       try {
             $student = $request->only([
                 'name',
                 'email',
-                'phone'
+                'phone',
+                'password',
+                'is_active',
+                'image',
+                'ckeditor'
             ]);
-
+            
             $student_data = Student::create($student);
 
             $data = [
