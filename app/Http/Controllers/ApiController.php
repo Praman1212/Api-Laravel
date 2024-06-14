@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
@@ -64,6 +65,15 @@ class ApiController extends Controller
 
 
         try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email'=> 'required|email|unique:students',
+                'phone'=> 'required|string|min:6|max:10',
+                'password' => 'required|string|min:6',
+                'is_active' => 'required|boolean',
+                'image' => 'nullable',
+                'ckeditor' => 'nullable|string'
+            ]);
             $student = $request->only([
                 'name',
                 'email',
@@ -73,7 +83,7 @@ class ApiController extends Controller
                 'image',
                 'ckeditor'
             ]);
-
+            $student['password'] = Hash::make($student['password']);
             $student_data = Student::create($student);
 
             $data = [
@@ -94,6 +104,15 @@ class ApiController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email'=> 'required|email|unique:students',
+            'phone'=> 'required|string|min:6|max:10',
+            'password' => 'required|string|min:6',
+            'is_active' => 'required|boolean',
+            'image' => 'nullable',
+            'ckeditor' => 'nullable|string'
+        ]);
         $data = $request->only([
             'name',
             'email',
@@ -103,6 +122,7 @@ class ApiController extends Controller
             'image',
             'ckeditor'
         ]);
+        $data['password'] = Hash::make($data['password']);
         if($data){
             $student_update = Student::find($id)->update($data);
 
